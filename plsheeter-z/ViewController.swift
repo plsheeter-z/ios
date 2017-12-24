@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print("########## 3333333333")
+        self.plsheeter.delegate = self
         let plsheeterSite = URL(string: "https://pl-sheeter.heteml.net/")!
-        plsheeter.loadRequest(URLRequest(url: plsheeterSite))
+        self.plsheeter.loadRequest(URLRequest(url: plsheeterSite))
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,10 +26,13 @@ class ViewController: UIViewController {
     
 }
 
+// MARK: UIWebViewDelegate
 extension ViewController: UIWebViewDelegate {
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print("########## 2222222")
+        
+        let string = request.url!
+        print(string)
         return true
     }
     
