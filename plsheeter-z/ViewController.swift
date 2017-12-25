@@ -26,14 +26,24 @@ class ViewController: UIViewController {
     
 }
 
-// MARK: UIWebViewDelegate
 extension ViewController: UIWebViewDelegate {
+   
+   func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+
+        if request.url?.scheme != "data" {
+            print("####### 33333")
+            return true
+        } else {
+            print("######### 44444444")
+            let requestString: String? = request.url?.absoluteString
+            let params = requestString?.components(separatedBy: "data:image/png;base64,")
+            print(params![0])
+//            let decodedData = Data(fromBase64String: params?[1])
+//            let image = UIImage(data: decodedData)
+//            UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+            return false
+        }
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
-        let string = request.url!
-        print(string)
-        return true
     }
     
 }
